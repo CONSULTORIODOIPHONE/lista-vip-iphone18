@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lista VIP de lançamento - Brunão do iPhone e Consultório do iPhone">
+  <meta name="theme-color" content="#050505">
+  <title>Lista VIP | Brunão do iPhone + Consultório do iPhone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+
+  <header class="topbar">
+    <div class="brand-wrap">
+      <div class="brand">
+        <span class="brand-main">BRUNÃO DO IPHONE</span>
+        <span class="brand-x">×</span>
+        <span class="brand-main">CONSULTÓRIO DO IPHONE</span>
+      </div>
+      <span class="tag">LISTA VIP 2026</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <div class="eyebrow">LANÇAMENTO • 09.09.2026</div>
+      <h1>A próxima geração<br><span>está chegando.</span></h1>
+      <p class="hero-copy">
+        Entre na nossa Lista VIP para receber primeiro informações sobre
+        modelos, cores, valores, disponibilidade e condições de upgrade.
+      </p>
+
+      <div class="countdown" aria-label="Contagem regressiva para 09 de setembro de 2026">
+        <div class="count-box"><strong id="days">00</strong><span>dias</span></div>
+        <div class="separator">:</div>
+        <div class="count-box"><strong id="hours">00</strong><span>horas</span></div>
+        <div class="separator">:</div>
+        <div class="count-box"><strong id="minutes">00</strong><span>min</span></div>
+        <div class="separator">:</div>
+        <div class="count-box"><strong id="seconds">00</strong><span>seg</span></div>
+      </div>
+
+      <a href="#cadastro" class="primary-btn">QUERO ENTRAR NA LISTA VIP</a>
+      <p class="microcopy">Cadastro gratuito • Sem compromisso de compra</p>
+    </section>
+
+    <section class="benefits container">
+      <article class="benefit-card">
+        <div class="icon">01</div>
+        <h2>Receba primeiro</h2>
+        <p>Novidades, disponibilidade e condições assim que forem liberadas.</p>
+      </article>
+      <article class="benefit-card">
+        <div class="icon">02</div>
+        <h2>Prioridade no upgrade</h2>
+        <p>Informe seu iPhone atual e adiante o processo de avaliação para troca.</p>
+      </article>
+      <article class="benefit-card">
+        <div class="icon">03</div>
+        <h2>Atendimento direto</h2>
+        <p>Nossa equipe poderá falar com você pelo WhatsApp quando houver novidades.</p>
+      </article>
+    </section>
+
+    <section id="cadastro" class="form-section container">
+      <div class="form-heading">
+        <div class="eyebrow">ENTRE PARA A LISTA</div>
+        <h2>Qual vai ser seu próximo iPhone?</h2>
+        <p>Leva menos de 1 minuto.</p>
+      </div>
+
+      <form id="vipForm" class="form-card">
+        <div class="field">
+          <label for="nome">Seu nome *</label>
+          <input id="nome" name="nome" type="text" placeholder="Ex.: João Silva" required maxlength="80">
+        </div>
+
+        <div class="field">
+          <label for="whatsapp">WhatsApp *</label>
+          <input id="whatsapp" name="whatsapp" type="tel" inputmode="numeric" placeholder="(21) 99999-9999" required maxlength="16">
+        </div>
+
+        <div class="field">
+          <label for="iphoneAtual">Qual iPhone você usa hoje? *</label>
+          <select id="iphoneAtual" name="iphoneAtual" required>
+            <option value="" selected disabled>Selecione</option>
+            <option>iPhone 11 ou anterior</option>
+            <option>iPhone 12</option>
+            <option>iPhone 12 Pro</option>
+            <option>iPhone 12 Pro Max</option>
+            <option>iPhone 13</option>
+            <option>iPhone 13 Pro</option>
+            <option>iPhone 13 Pro Max</option>
+            <option>iPhone 14</option>
+            <option>iPhone 14 Plus</option>
+            <option>iPhone 14 Pro</option>
+            <option>iPhone 14 Pro Max</option>
+            <option>iPhone 15</option>
+            <option>iPhone 15 Plus</option>
+            <option>iPhone 15 Pro</option>
+            <option>iPhone 15 Pro Max</option>
+            <option>iPhone 16</option>
+            <option>iPhone 16e</option>
+            <option>iPhone 16 Pro</option>
+            <option>iPhone 16 Pro Max</option>
+            <option>iPhone 17</option>
+            <option>iPhone 17 Pro</option>
+            <option>iPhone 17 Pro Max</option>
+            <option>Outro modelo</option>
+            <option>Não tenho iPhone</option>
+          </select>
+        </div>
+
+        <fieldset class="field">
+          <legend>Qual lançamento mais te interessa? *</legend>
+          <div class="choice-grid">
+            <label class="choice">
+              <input type="radio" name="interesse" value="Novo iPhone Pro" required>
+              <span><b>Pro</b><small>Quero conhecer o novo Pro</small></span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="interesse" value="Novo iPhone Pro Max">
+              <span><b>Pro Max</b><small>Quero o modelo maior/topo</small></span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="interesse" value="Possível iPhone dobrável">
+              <span><b>Dobrável</b><small>Quero saber se será anunciado</small></span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="interesse" value="Ainda não sei">
+              <span><b>Ainda não sei</b><small>Quero ver todos primeiro</small></span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label for="upgrade">Vai usar seu iPhone atual no upgrade? *</label>
+          <select id="upgrade" name="upgrade" required>
+            <option value="" selected disabled>Selecione</option>
+            <option>Sim</option>
+            <option>Talvez, quero saber quanto vale</option>
+            <option>Não</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="momento">Quando pretende fazer o upgrade? *</label>
+          <select id="momento" name="momento" required>
+            <option value="" selected disabled>Selecione</option>
+            <option>Quero comprar assim que chegar</option>
+            <option>Ainda em setembro</option>
+            <option>Estou pesquisando / quero acompanhar</option>
+            <option>Ainda não sei</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="pagamento">Como pretende pagar a diferença? *</label>
+          <select id="pagamento" name="pagamento" required>
+            <option value="" selected disabled>Selecione</option>
+            <option>Pix</option>
+            <option>Cartão</option>
+            <option>Meu iPhone + Pix</option>
+            <option>Meu iPhone + cartão</option>
+            <option>Ainda não sei</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="origem">Como chegou até essa lista?</label>
+          <select id="origem" name="origem">
+            <option value="" selected>Não informado</option>
+            <option>Instagram Brunão do iPhone</option>
+            <option>Instagram Consultório do iPhone</option>
+            <option>WhatsApp / Grupo VIP</option>
+            <option>Indicação</option>
+            <option>Loja física</option>
+            <option>Outro</option>
+          </select>
+        </div>
+
+        <label class="consent">
+          <input type="checkbox" id="consentimento" name="consentimento" required>
+          <span>Autorizo contato pelo WhatsApp sobre esta Lista VIP, disponibilidade, lançamento, condições e upgrade. *</span>
+        </label>
+
+        <button id="submitBtn" type="submit" class="primary-btn full">
+          <span id="submitText">GARANTIR MINHA PRIORIDADE</span>
+          <span id="spinner" class="spinner hidden"></span>
+        </button>
+
+        <div id="formMessage" class="form-message" role="status" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <section class="trust container">
+      <p>Atendimento por</p>
+      <strong>Brunão do iPhone + Consultório do iPhone</strong>
+      <span>Rio de Janeiro • Compra, venda, upgrade e assistência especializada</span>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <p>© 2026 Brunão do iPhone / Consultório do iPhone.</p>
+      <p class="legal">Página independente. Marcas citadas pertencem aos seus respectivos proprietários.</p>
+    </div>
+  </footer>
+
+  <div id="successModal" class="modal hidden" aria-hidden="true">
+    <div class="modal-card">
+      <div class="check">✓</div>
+      <div class="eyebrow">CADASTRO REALIZADO</div>
+      <h2>Você está na Lista VIP.</h2>
+      <p>Agora fique de olho no WhatsApp. Nossa equipe poderá entrar em contato com você quando tivermos novidades.</p>
+      <button id="closeModal" class="primary-btn full">PERFEITO</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
