@@ -6,7 +6,7 @@ Cole a URL que termina em /exec
 */
 
 const WEB_APP_URL =
-  "https://script.google.com/a/macros/consultoriodoiphone.com/s/AKfycbxUwgg10ueu0DrPydhmhkN65na0ipmZxKKCicRmZx-K2w4TG--Zw8FGzWGRtvVuwN-N/exec";
+  "https://script.google.com/macros/s/AKfycbxUwgg10ueu0DrPydhmhkN65na0ipmZxKKCicRmZx-K2w4TG--Zw8FGzWGRtvVuwN-N/exec";
 
 
 /*
