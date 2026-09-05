@@ -605,7 +605,11 @@ window.receiveVipStats =
     }
 
 
-    const total =
+    const BASE_VISUAL =
+      10;
+
+
+    const totalReal =
       Number(
         data.total || 0
       );
@@ -617,22 +621,9 @@ window.receiveVipStats =
       );
 
 
-    const leadCount =
-      document.getElementById(
-        "leadCount"
-      );
-
-
-    const leadText =
-      document.getElementById(
-        "leadText"
-      );
-
-
-    const todayCount =
-      document.getElementById(
-        "todayCount"
-      );
+    const total =
+      BASE_VISUAL +
+      totalReal;
 
 
 
