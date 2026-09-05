@@ -5,7 +5,21 @@ CONFIGURAÇÃO
 */
 
 const WEB_APP_URL =
-  "https://script.google.com/macros/s/AKfycbyjw9SpnmHrnliBjXTg5OXlJJQASZ5_ldGDALt7hvi0lRVx1LlK6ASyCU_-bGDC7Y8/exec?action=stats&callback=receiveVipStats";
+  "https://script.google.com/macros/s/AKfycbyjw9SpnmHrnliBjXTg5OXlJJQASZ5_ldGDALt7hvi0lRVx1LlK6ASyCU_-bGDC7Y8/exec";
+
+
+/*
+=========================================================
+CONTADOR INICIAL
+=========================================================
+
+Use 10 somente se esses 10 interessados representarem
+pessoas que vocês realmente já possuem na campanha.
+*/
+
+const BASE_LIST_COUNT =
+  10;
+
 
 
 /*
@@ -51,32 +65,49 @@ WHATSAPP
 
 function onlyDigits(value) {
 
-  return String(value || "")
-    .replace(/\D/g, "");
+  return String(
+    value || ""
+  )
+    .replace(
+      /\D/g,
+      ""
+    );
 
 }
+
 
 
 function formatWhatsApp(value) {
 
   const digits =
     onlyDigits(value)
-      .slice(0, 11);
+      .slice(
+        0,
+        11
+      );
 
 
-  if (digits.length <= 2) {
+  if (
+    digits.length <= 2
+  ) {
+
     return digits;
+
   }
 
 
-  if (digits.length <= 7) {
+  if (
+    digits.length <= 7
+  ) {
 
     return `(${digits.slice(0,2)}) ${digits.slice(2)}`;
 
   }
 
 
-  if (digits.length <= 10) {
+  if (
+    digits.length <= 10
+  ) {
 
     return `(${digits.slice(0,2)}) ${digits.slice(2,6)}-${digits.slice(6)}`;
 
@@ -118,7 +149,7 @@ function setLoading(loading) {
   submitText.textContent =
     loading
       ? "ENVIANDO..."
-      : "GARANTIR MINHA PRIORIDADE";
+      : "ENTRAR NA LISTA VIP";
 
 
   spinner.classList.toggle(
@@ -138,7 +169,7 @@ function setLoading(loading) {
 
 /*
 =========================================================
-MENSAGENS
+MENSAGEM
 =========================================================
 */
 
@@ -176,6 +207,7 @@ function openSuccess() {
   );
 
 }
+
 
 
 function closeSuccess() {
@@ -219,7 +251,7 @@ modal.addEventListener(
 
 /*
 =========================================================
-ORIGEM AUTOMÁTICA VIA LINK
+ORIGEM AUTOMÁTICA
 =========================================================
 */
 
@@ -232,7 +264,9 @@ function detectOrigin() {
 
 
   const origin =
-    params.get("origem");
+    params.get(
+      "origem"
+    );
 
 
   if (!origin) {
@@ -281,13 +315,14 @@ function detectOrigin() {
 }
 
 
+
 detectOrigin();
 
 
 
 /*
 =========================================================
-CADASTRO
+ENVIO
 =========================================================
 */
 
@@ -308,7 +343,7 @@ form.addEventListener(
     ) {
 
       showMessage(
-        "Configure a URL do Apps Script no arquivo script.js.",
+        "Configure a URL do Apps Script.",
         "error"
       );
 
@@ -350,7 +385,7 @@ form.addEventListener(
 
 
     for (
-      const [key, value]
+      const [key,value]
       of data.entries()
     ) {
 
@@ -424,10 +459,14 @@ form.addEventListener(
 
     }
 
-    catch (error) {
+    catch (
+      error
+    ) {
 
 
-      console.error(error);
+      console.error(
+        error
+      );
 
 
       showMessage(
@@ -451,7 +490,7 @@ form.addEventListener(
 
 /*
 =========================================================
-CONTADOR EVENTO
+COUNTDOWN
 =========================================================
 */
 
@@ -491,13 +530,13 @@ function showPostLaunch() {
 
 function updateCountdown() {
 
-
   const now =
     new Date();
 
 
   let difference =
-    launchDate - now;
+    launchDate -
+    now;
 
 
   if (
@@ -513,7 +552,8 @@ function updateCountdown() {
 
   const days =
     Math.floor(
-      difference / 86400000
+      difference /
+      86400000
     );
 
 
@@ -523,7 +563,8 @@ function updateCountdown() {
 
   const hours =
     Math.floor(
-      difference / 3600000
+      difference /
+      3600000
     );
 
 
@@ -533,7 +574,8 @@ function updateCountdown() {
 
   const minutes =
     Math.floor(
-      difference / 60000
+      difference /
+      60000
     );
 
 
@@ -543,7 +585,8 @@ function updateCountdown() {
 
   const seconds =
     Math.floor(
-      difference / 1000
+      difference /
+      1000
     );
 
 
@@ -551,28 +594,40 @@ function updateCountdown() {
     "days"
   ).textContent =
     String(days)
-      .padStart(2,"0");
+      .padStart(
+        2,
+        "0"
+      );
 
 
   document.getElementById(
     "hours"
   ).textContent =
     String(hours)
-      .padStart(2,"0");
+      .padStart(
+        2,
+        "0"
+      );
 
 
   document.getElementById(
     "minutes"
   ).textContent =
     String(minutes)
-      .padStart(2,"0");
+      .padStart(
+        2,
+        "0"
+      );
 
 
   document.getElementById(
     "seconds"
   ).textContent =
     String(seconds)
-      .padStart(2,"0");
+      .padStart(
+        2,
+        "0"
+      );
 
 }
 
@@ -590,26 +645,19 @@ setInterval(
 
 /*
 =========================================================
-ESTATÍSTICAS REAIS
-TOTAL + HOJE
+ESTATÍSTICAS
 =========================================================
 */
 
-
 window.receiveVipStats =
   function(data) {
-
 
     if (!data) {
       return;
     }
 
 
-    const BASE_VISUAL =
-      10;
-
-
-    const totalReal =
+    const realTotal =
       Number(
         data.total || 0
       );
@@ -622,60 +670,39 @@ window.receiveVipStats =
 
 
     const total =
-      BASE_VISUAL +
-      totalReal;
+      BASE_LIST_COUNT +
+      realTotal;
 
 
+    const leadCount =
+      document.getElementById(
+        "leadCount"
+      );
 
-    /*
-    TOTAL
-    */
+
+    const todayCount =
+      document.getElementById(
+        "todayCount"
+      );
+
 
 
     if (
-      total <= 0
-    ) {
-
-      leadCount.textContent =
-        "Lista VIP aberta";
-
-
-      leadText.textContent =
-        "Seja um dos primeiros a entrar";
-
-    }
-
-
-    else if (
       total === 1
     ) {
 
       leadCount.textContent =
         "1 pessoa já entrou";
 
-
-      leadText.textContent =
-        "na nossa Lista VIP";
-
     }
-
 
     else {
 
       leadCount.textContent =
         `${total} pessoas já entraram`;
 
-
-      leadText.textContent =
-        "na nossa Lista VIP";
-
     }
 
-
-
-    /*
-    HOJE
-    */
 
 
     if (
@@ -687,7 +714,6 @@ window.receiveVipStats =
 
     }
 
-
     else if (
       today === 1
     ) {
@@ -696,7 +722,6 @@ window.receiveVipStats =
         "1 pessoa entrou hoje";
 
     }
-
 
     else {
 
@@ -711,7 +736,6 @@ window.receiveVipStats =
 
 function loadStats() {
 
-
   if (
     WEB_APP_URL.includes(
       "COLE_AQUI"
@@ -723,17 +747,17 @@ function loadStats() {
   }
 
 
-  const oldScript =
+  const previous =
     document.getElementById(
       "vip-stats-script"
     );
 
 
   if (
-    oldScript
+    previous
   ) {
 
-    oldScript.remove();
+    previous.remove();
 
   }
 
@@ -761,7 +785,6 @@ function loadStats() {
 
 
 loadStats();
-
 
 
 setInterval(
