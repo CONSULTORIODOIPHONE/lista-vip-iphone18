@@ -2075,6 +2075,175 @@ footer {
 /* MOBILE */
 
 @media (max-width: 650px) {
+
+  /* =========================================
+   HERO MOBILE - IPHONE ANTES DO CTA
+========================================= */
+
+.hero-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.hero-content {
+  display: contents;
+}
+
+
+/* 1 - BADGE */
+
+.launch-badge {
+  order: 1;
+  align-self: center;
+}
+
+
+/* 2 - TÍTULO */
+
+.hero h1 {
+  order: 2;
+  text-align: center;
+}
+
+
+/* 3 - DESCRIÇÃO */
+
+.hero-description {
+  order: 3;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* 4 - PROVA SOCIAL */
+
+.social-proof-wrapper {
+  order: 4;
+  width: 100%;
+  margin-top: 25px;
+}
+
+
+/* 5 - IMAGEM DO IPHONE */
+
+.iphone-area {
+  order: 5;
+
+  width: 100%;
+
+  min-height: 390px;
+
+  margin-top: 10px;
+  margin-bottom: 5px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.iphone-image {
+  width: 360px;
+  max-width: 96%;
+
+  max-height: 410px;
+
+  object-fit: contain;
+}
+
+
+/* deixa o brilho mais evidente no celular */
+
+.iphone-glow {
+  width: 280px;
+  height: 280px;
+
+  background: rgba(75, 246, 104, .14);
+
+  filter: blur(70px);
+}
+
+
+/* círculos atrás do aparelho */
+
+.ring-one {
+  width: 290px;
+  height: 290px;
+}
+
+
+.ring-two {
+  width: 350px;
+  height: 350px;
+}
+
+
+/* cards flutuantes */
+
+.card-one {
+  left: 0;
+  top: 20%;
+}
+
+
+.card-two {
+  right: 0;
+  bottom: 20%;
+}
+
+
+/* aviso de imagem conceitual */
+
+.concept-label {
+  bottom: 0;
+
+  width: auto;
+
+  max-width: 90%;
+
+  text-align: center;
+
+  font-size: 7px;
+}
+
+
+/* 6 - BOTÃO DE CADASTRO */
+
+.hero-actions {
+  order: 6;
+
+  width: 100%;
+
+  margin-top: 15px;
+}
+
+
+.hero-button {
+  width: 100%;
+
+  min-height: 65px;
+
+  font-size: 13px;
+
+  border-radius: 15px;
+}
+
+
+/* 7 - SEGURANÇA */
+
+.hero-security {
+  order: 7;
+
+  width: 100%;
+
+  justify-content: center;
+
+  margin-top: 14px;
+
+  font-size: 8px;
+}
  .hero {
     padding-top: 38px;
   }
