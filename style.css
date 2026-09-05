@@ -277,7 +277,9 @@ body.modal-open {
 
   color: #99999f;
 
-  font-size: 16px;
+  font-size: 18px;
+
+  line-height: 1.65;
 }
 
 
@@ -364,12 +366,12 @@ body.modal-open {
 
   color: var(--green);
 
-  font-size: 17px;
+  font-size: 20px;
 }
 
 
 .social-proof span {
-  display: block;
+ display: block;
 
   margin-top: 1px;
 
@@ -466,7 +468,7 @@ body.modal-open {
 
   color: #031006;
 
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 900;
 
   text-decoration: none;
@@ -1020,20 +1022,21 @@ body.modal-open {
 
 .benefit h3 {
   margin:
-    7px 0;
+    8px 0;
 
-  font-size: 20px;
+  font-size: 23px;
 }
 
 
 .benefit p {
   margin: 0;
 
-  color: #77777d;
+  color: #88888e;
 
-  font-size: 12px;
+  font-size: 14px;
+
+  line-height: 1.65;
 }
-
 
 
 /* UPGRADE */
@@ -1101,25 +1104,28 @@ body.modal-open {
 .upgrade-content > p {
   max-width: 620px;
 
-  color: #88888e;
+  color: #929298;
 
-  font-size: 13px;
+  font-size: 15px;
+
+  line-height: 1.7;
 }
 
 
 .upgrade-points {
   margin:
-    23px 0;
+    25px 0;
 
   display: grid;
 
-  gap: 9px;
+  gap: 12px;
 
-  color: #a1a1a6;
+  color: #a9a9ae;
 
-  font-size: 11px;
+  font-size: 13px;
+
+  line-height: 1.55;
 }
-
 
 .upgrade-points span {
   margin-right: 8px;
@@ -2069,7 +2075,168 @@ footer {
 /* MOBILE */
 
 @media (max-width: 650px) {
+ .hero {
+    padding-top: 38px;
+  }
 
+  .launch-badge {
+    font-size: 9px;
+    padding: 9px 14px;
+  }
+
+  .hero h1 {
+    font-size: clamp(
+      48px,
+      15.5vw,
+      66px
+    );
+
+    line-height: .98;
+  }
+
+  .hero-description {
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .social-proof {
+    padding: 16px;
+  }
+
+  .social-proof strong {
+    font-size: 19px;
+  }
+
+  .social-proof span {
+    font-size: 10px;
+  }
+
+  .today-proof {
+    font-size: 10px;
+    padding: 11px 14px;
+  }
+
+  .hero-button {
+    min-height: 64px;
+    font-size: 13px;
+    padding: 0 18px;
+  }
+
+  .hero-security {
+    font-size: 8px;
+    line-height: 1.5;
+  }
+
+  .iphone-area {
+    min-height: 420px;
+  }
+
+  .iphone-image {
+    width: 360px;
+    max-width: 96%;
+  }
+
+  .section-title h2,
+  .trust-heading h2,
+  .faq-heading h2 {
+    font-size: 38px;
+  }
+
+  .benefit {
+    padding: 26px 22px;
+  }
+
+  .benefit h3 {
+    font-size: 22px;
+  }
+
+  .benefit p {
+    font-size: 13px;
+  }
+
+  .upgrade-content h2 {
+    font-size: 38px;
+  }
+
+  .upgrade-content > p {
+    font-size: 14px;
+  }
+
+  .upgrade-points {
+    font-size: 12px;
+  }
+
+  .trust-item strong {
+    font-size: 31px;
+  }
+
+  .trust-item span {
+    font-size: 10px;
+  }
+
+  .section-heading h2 {
+    font-size: 42px;
+  }
+
+  .section-heading p {
+    font-size: 12px;
+  }
+
+  .field label,
+  .field legend {
+    font-size: 11px;
+  }
+
+  .field input,
+  .field select {
+    height: 56px;
+    font-size: 13px;
+  }
+
+  .choice span {
+    min-height: 78px;
+  }
+
+  .choice strong {
+    font-size: 13px;
+  }
+
+  .choice small {
+    font-size: 9px;
+  }
+
+  .consent {
+    font-size: 9px;
+  }
+
+  .form-submit {
+    min-height: 62px;
+    font-size: 13px;
+  }
+
+  summary {
+    font-size: 13px;
+  }
+
+  details p {
+    font-size: 11px;
+  }
+
+  .final-cta p {
+    font-size: 12px;
+  }
+
+  .mobile-sticky-cta {
+    height: 64px;
+  }
+
+  .mobile-sticky-cta small {
+    font-size: 8px;
+  }
+
+  .mobile-sticky-cta strong {
+    font-size: 12px;
+  }
 
   body {
     padding-bottom: 76px;
