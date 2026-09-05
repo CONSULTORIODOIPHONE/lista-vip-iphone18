@@ -2,11 +2,10 @@
 =========================================================
 CONFIGURAÇÃO
 =========================================================
-Cole a URL que termina em /exec
 */
 
 const WEB_APP_URL =
-  "https://script.google.com/macros/s/AKfycbxUwgg10ueu0DrPydhmhkN65na0ipmZxKKCicRmZx-K2w4TG--Zw8FGzWGRtvVuwN-N/exec";
+  "https://script.google.com/macros/s/AKfycbyjw9SpnmHrnliBjXTg5OXlJJQASZ5_ldGDALt7hvi0lRVx1LlK6ASyCU_-bGDC7Y8/exec?action=stats&callback=receiveVipStats";
 
 
 /*
@@ -23,6 +22,9 @@ const submitBtn =
 
 const submitText =
   document.getElementById("submitText");
+
+const submitArrow =
+  document.getElementById("submitArrow");
 
 const spinner =
   document.getElementById("spinner");
@@ -49,10 +51,8 @@ WHATSAPP
 
 function onlyDigits(value) {
 
-  return value.replace(
-    /\D/g,
-    ""
-  );
+  return String(value || "")
+    .replace(/\D/g, "");
 
 }
 
@@ -61,40 +61,29 @@ function formatWhatsApp(value) {
 
   const digits =
     onlyDigits(value)
-      .slice(
-        0,
-        11
-      );
+      .slice(0, 11);
 
 
-  if (
-    digits.length <= 2
-  ) {
-
+  if (digits.length <= 2) {
     return digits;
+  }
+
+
+  if (digits.length <= 7) {
+
+    return `(${digits.slice(0,2)}) ${digits.slice(2)}`;
 
   }
 
 
-  if (
-    digits.length <= 7
-  ) {
+  if (digits.length <= 10) {
 
-    return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+    return `(${digits.slice(0,2)}) ${digits.slice(2,6)}-${digits.slice(6)}`;
 
   }
 
 
-  if (
-    digits.length <= 10
-  ) {
-
-    return `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`;
-
-  }
-
-
-  return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+  return `(${digits.slice(0,2)}) ${digits.slice(2,7)}-${digits.slice(7)}`;
 
 }
 
@@ -102,7 +91,6 @@ function formatWhatsApp(value) {
 
 whatsappInput.addEventListener(
   "input",
-
   event => {
 
     event.target.value =
@@ -117,7 +105,7 @@ whatsappInput.addEventListener(
 
 /*
 =========================================================
-BOTÃO
+LOADING
 =========================================================
 */
 
@@ -130,12 +118,18 @@ function setLoading(loading) {
   submitText.textContent =
     loading
       ? "ENVIANDO..."
-      : "QUERO ENTRAR NA LISTA VIP";
+      : "GARANTIR MINHA PRIORIDADE";
 
 
   spinner.classList.toggle(
     "hidden",
     !loading
+  );
+
+
+  submitArrow.classList.toggle(
+    "hidden",
+    loading
   );
 
 }
@@ -208,7 +202,6 @@ closeModal.addEventListener(
 
 modal.addEventListener(
   "click",
-
   event => {
 
     if (
@@ -226,7 +219,7 @@ modal.addEventListener(
 
 /*
 =========================================================
-ORIGEM AUTOMÁTICA
+ORIGEM AUTOMÁTICA VIA LINK
 =========================================================
 */
 
@@ -242,12 +235,8 @@ function detectOrigin() {
     params.get("origem");
 
 
-  if (
-    !origin
-  ) {
-
+  if (!origin) {
     return;
-
   }
 
 
@@ -268,8 +257,14 @@ function detectOrigin() {
     vip:
       "WhatsApp / Grupo VIP",
 
+    whatsapp:
+      "WhatsApp / Grupo VIP",
+
     loja:
-      "Loja física"
+      "Loja física",
+
+    indicacao:
+      "Indicação"
 
   };
 
@@ -292,13 +287,12 @@ detectOrigin();
 
 /*
 =========================================================
-FORMULÁRIO
+CADASTRO
 =========================================================
 */
 
 form.addEventListener(
   "submit",
-
   async event => {
 
     event.preventDefault();
@@ -314,7 +308,7 @@ form.addEventListener(
     ) {
 
       showMessage(
-        "Configure primeiro a URL do Apps Script no arquivo script.js.",
+        "Configure a URL do Apps Script no arquivo script.js.",
         "error"
       );
 
@@ -342,16 +336,13 @@ form.addEventListener(
 
       whatsappInput.focus();
 
-
       return;
 
     }
 
 
     const data =
-      new FormData(
-        form
-      );
+      new FormData(form);
 
 
     const payload =
@@ -383,18 +374,14 @@ form.addEventListener(
     );
 
 
-    setLoading(
-      true
-    );
+    setLoading(true);
 
 
     try {
 
 
       await fetch(
-
         WEB_APP_URL,
-
         {
 
           method:
@@ -414,7 +401,6 @@ form.addEventListener(
             payload.toString()
 
         }
-
       );
 
 
@@ -422,7 +408,7 @@ form.addEventListener(
 
 
       showMessage(
-        "Cadastro enviado com sucesso.",
+        "Cadastro enviado.",
         "success"
       );
 
@@ -430,27 +416,18 @@ form.addEventListener(
       openSuccess();
 
 
-      /*
-      Atualiza o número na tela
-      alguns segundos depois
-      */
-
       setTimeout(
-        loadLeadCount,
-        2000
+        loadStats,
+        1800
       );
 
 
     }
 
-    catch (
-      error
-    ) {
+    catch (error) {
 
 
-      console.error(
-        error
-      );
+      console.error(error);
 
 
       showMessage(
@@ -463,11 +440,7 @@ form.addEventListener(
 
     finally {
 
-
-      setLoading(
-        false
-      );
-
+      setLoading(false);
 
     }
 
@@ -478,8 +451,7 @@ form.addEventListener(
 
 /*
 =========================================================
-CONTAGEM REGRESSIVA
-09/09/2026
+CONTADOR EVENTO
 =========================================================
 */
 
@@ -487,6 +459,34 @@ const launchDate =
   new Date(
     "2026-09-09T14:00:00-03:00"
   );
+
+
+const countdownCard =
+  document.getElementById(
+    "countdownCard"
+  );
+
+
+const postLaunchCard =
+  document.getElementById(
+    "postLaunchCard"
+  );
+
+
+
+function showPostLaunch() {
+
+  countdownCard.classList.add(
+    "hidden"
+  );
+
+
+  postLaunchCard.classList.remove(
+    "hidden"
+  );
+
+}
+
 
 
 function updateCountdown() {
@@ -504,29 +504,7 @@ function updateCountdown() {
     difference <= 0
   ) {
 
-    document.getElementById(
-      "days"
-    ).textContent =
-      "00";
-
-
-    document.getElementById(
-      "hours"
-    ).textContent =
-      "00";
-
-
-    document.getElementById(
-      "minutes"
-    ).textContent =
-      "00";
-
-
-    document.getElementById(
-      "seconds"
-    ).textContent =
-      "00";
-
+    showPostLaunch();
 
     return;
 
@@ -535,8 +513,7 @@ function updateCountdown() {
 
   const days =
     Math.floor(
-      difference /
-      86400000
+      difference / 86400000
     );
 
 
@@ -546,8 +523,7 @@ function updateCountdown() {
 
   const hours =
     Math.floor(
-      difference /
-      3600000
+      difference / 3600000
     );
 
 
@@ -557,8 +533,7 @@ function updateCountdown() {
 
   const minutes =
     Math.floor(
-      difference /
-      60000
+      difference / 60000
     );
 
 
@@ -568,8 +543,7 @@ function updateCountdown() {
 
   const seconds =
     Math.floor(
-      difference /
-      1000
+      difference / 1000
     );
 
 
@@ -577,40 +551,28 @@ function updateCountdown() {
     "days"
   ).textContent =
     String(days)
-      .padStart(
-        2,
-        "0"
-      );
+      .padStart(2,"0");
 
 
   document.getElementById(
     "hours"
   ).textContent =
     String(hours)
-      .padStart(
-        2,
-        "0"
-      );
+      .padStart(2,"0");
 
 
   document.getElementById(
     "minutes"
   ).textContent =
     String(minutes)
-      .padStart(
-        2,
-        "0"
-      );
+      .padStart(2,"0");
 
 
   document.getElementById(
     "seconds"
   ).textContent =
     String(seconds)
-      .padStart(
-        2,
-        "0"
-      );
+      .padStart(2,"0");
 
 }
 
@@ -628,28 +590,31 @@ setInterval(
 
 /*
 =========================================================
-NÚMERO REAL DE PESSOAS NA LISTA
-JSONP
+ESTATÍSTICAS REAIS
+TOTAL + HOJE
 =========================================================
 */
 
 
-window.receiveLeadCount =
+window.receiveVipStats =
   function(data) {
 
 
-    if (
-      !data ||
-      typeof data.count !== "number"
-    ) {
-
+    if (!data) {
       return;
-
     }
 
 
-    const count =
-      data.count;
+    const total =
+      Number(
+        data.total || 0
+      );
+
+
+    const today =
+      Number(
+        data.today || 0
+      );
 
 
     const leadCount =
@@ -664,13 +629,20 @@ window.receiveLeadCount =
       );
 
 
+    const todayCount =
+      document.getElementById(
+        "todayCount"
+      );
+
+
+
     /*
-    Só mostra número quando
-    já existirem cadastros reais.
+    TOTAL
     */
 
+
     if (
-      count === 0
+      total <= 0
     ) {
 
       leadCount.textContent =
@@ -678,15 +650,13 @@ window.receiveLeadCount =
 
 
       leadText.textContent =
-        "seja um dos primeiros a entrar";
-
-      return;
+        "Seja um dos primeiros a entrar";
 
     }
 
 
-    if (
-      count === 1
+    else if (
+      total === 1
     ) {
 
       leadCount.textContent =
@@ -696,23 +666,59 @@ window.receiveLeadCount =
       leadText.textContent =
         "na nossa Lista VIP";
 
-      return;
+    }
+
+
+    else {
+
+      leadCount.textContent =
+        `${total} pessoas já entraram`;
+
+
+      leadText.textContent =
+        "na nossa Lista VIP";
 
     }
 
 
-    leadCount.textContent =
-      `${count} pessoas já entraram`;
+
+    /*
+    HOJE
+    */
 
 
-    leadText.textContent =
-      "na nossa Lista VIP";
+    if (
+      today <= 0
+    ) {
+
+      todayCount.textContent =
+        "Lista recebendo novos cadastros";
+
+    }
+
+
+    else if (
+      today === 1
+    ) {
+
+      todayCount.textContent =
+        "1 pessoa entrou hoje";
+
+    }
+
+
+    else {
+
+      todayCount.textContent =
+        `${today} pessoas entraram hoje`;
+
+    }
 
 };
 
 
 
-function loadLeadCount() {
+function loadStats() {
 
 
   if (
@@ -726,17 +732,17 @@ function loadLeadCount() {
   }
 
 
-  const previousScript =
+  const oldScript =
     document.getElementById(
-      "lead-count-script"
+      "vip-stats-script"
     );
 
 
   if (
-    previousScript
+    oldScript
   ) {
 
-    previousScript.remove();
+    oldScript.remove();
 
   }
 
@@ -748,11 +754,11 @@ function loadLeadCount() {
 
 
   script.id =
-    "lead-count-script";
+    "vip-stats-script";
 
 
   script.src =
-    `${WEB_APP_URL}?action=count&callback=receiveLeadCount&t=${Date.now()}`;
+    `${WEB_APP_URL}?action=stats&callback=receiveVipStats&t=${Date.now()}`;
 
 
   document.body.appendChild(
@@ -763,11 +769,11 @@ function loadLeadCount() {
 
 
 
-loadLeadCount();
+loadStats();
 
 
 
 setInterval(
-  loadLeadCount,
+  loadStats,
   60000
 );
