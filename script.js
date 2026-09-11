@@ -14,7 +14,7 @@ BASE DO CONTADOR
 ========================================================
 */
 
-const BASE_LIST_COUNT = 10;
+const BASE_LIST_COUNT = 24;
 
 
 
