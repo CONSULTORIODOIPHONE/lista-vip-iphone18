@@ -1,7 +1,7 @@
 /*
-=========================================================
+========================================================
 CONFIGURAÇÃO
-=========================================================
+========================================================
 */
 
 const WEB_APP_URL =
@@ -9,27 +9,26 @@ const WEB_APP_URL =
 
 
 /*
-=========================================================
-CONTADOR INICIAL
-=========================================================
-
-Use 10 somente se esses 10 interessados representarem
-pessoas que vocês realmente já possuem na campanha.
+========================================================
+BASE DO CONTADOR
+========================================================
 */
 
-const BASE_LIST_COUNT =
-  10;
+const BASE_LIST_COUNT = 10;
 
 
 
 /*
-=========================================================
+========================================================
 ELEMENTOS
-=========================================================
+========================================================
 */
 
 const form =
   document.getElementById("vipForm");
+
+const whatsappInput =
+  document.getElementById("whatsapp");
 
 const submitBtn =
   document.getElementById("submitBtn");
@@ -46,9 +45,6 @@ const spinner =
 const formMessage =
   document.getElementById("formMessage");
 
-const whatsappInput =
-  document.getElementById("whatsapp");
-
 const modal =
   document.getElementById("successModal");
 
@@ -58,56 +54,41 @@ const closeModal =
 
 
 /*
-=========================================================
+========================================================
 WHATSAPP
-=========================================================
+========================================================
 */
 
 function onlyDigits(value) {
 
-  return String(
-    value || ""
-  )
-    .replace(
-      /\D/g,
-      ""
-    );
+  return String(value || "")
+    .replace(/\D/g, "");
 
 }
-
 
 
 function formatWhatsApp(value) {
 
   const digits =
     onlyDigits(value)
-      .slice(
-        0,
-        11
-      );
+      .slice(0, 11);
 
 
-  if (
-    digits.length <= 2
-  ) {
+  if (digits.length <= 2) {
 
     return digits;
 
   }
 
 
-  if (
-    digits.length <= 7
-  ) {
+  if (digits.length <= 7) {
 
     return `(${digits.slice(0,2)}) ${digits.slice(2)}`;
 
   }
 
 
-  if (
-    digits.length <= 10
-  ) {
+  if (digits.length <= 10) {
 
     return `(${digits.slice(0,2)}) ${digits.slice(2,6)}-${digits.slice(6)}`;
 
@@ -135,124 +116,9 @@ whatsappInput.addEventListener(
 
 
 /*
-=========================================================
-LOADING
-=========================================================
-*/
-
-function setLoading(loading) {
-
-  submitBtn.disabled =
-    loading;
-
-
-  submitText.textContent =
-    loading
-      ? "ENVIANDO..."
-      : "ENTRAR NA LISTA VIP";
-
-
-  spinner.classList.toggle(
-    "hidden",
-    !loading
-  );
-
-
-  submitArrow.classList.toggle(
-    "hidden",
-    loading
-  );
-
-}
-
-
-
-/*
-=========================================================
-MENSAGEM
-=========================================================
-*/
-
-function showMessage(
-  text,
-  type = ""
-) {
-
-  formMessage.textContent =
-    text;
-
-
-  formMessage.className =
-    `form-message ${type}`;
-
-}
-
-
-
-/*
-=========================================================
-MODAL
-=========================================================
-*/
-
-function openSuccess() {
-
-  modal.classList.remove(
-    "hidden"
-  );
-
-
-  document.body.classList.add(
-    "modal-open"
-  );
-
-}
-
-
-
-function closeSuccess() {
-
-  modal.classList.add(
-    "hidden"
-  );
-
-
-  document.body.classList.remove(
-    "modal-open"
-  );
-
-}
-
-
-
-closeModal.addEventListener(
-  "click",
-  closeSuccess
-);
-
-
-
-modal.addEventListener(
-  "click",
-  event => {
-
-    if (
-      event.target === modal
-    ) {
-
-      closeSuccess();
-
-    }
-
-  }
-);
-
-
-
-/*
-=========================================================
-ORIGEM AUTOMÁTICA
-=========================================================
+========================================================
+ORIGEM
+========================================================
 */
 
 function detectOrigin() {
@@ -264,9 +130,7 @@ function detectOrigin() {
 
 
   const origin =
-    params.get(
-      "origem"
-    );
+    params.get("origem");
 
 
   if (!origin) {
@@ -274,10 +138,8 @@ function detectOrigin() {
   }
 
 
-  const select =
-    document.getElementById(
-      "origem"
-    );
+  const originInput =
+    document.getElementById("origem");
 
 
   const mapping = {
@@ -298,16 +160,17 @@ function detectOrigin() {
       "Loja física",
 
     indicacao:
-      "Indicação"
+      "Indicação",
+
+    instagram:
+      "Instagram"
 
   };
 
 
-  if (
-    mapping[origin]
-  ) {
+  if (mapping[origin]) {
 
-    select.value =
+    originInput.value =
       mapping[origin];
 
   }
@@ -315,15 +178,118 @@ function detectOrigin() {
 }
 
 
-
 detectOrigin();
 
 
 
 /*
-=========================================================
+========================================================
+LOADING
+========================================================
+*/
+
+function setLoading(loading) {
+
+  submitBtn.disabled =
+    loading;
+
+
+  submitText.textContent =
+    loading
+      ? "ENVIANDO..."
+      : "ENTRAR NA LISTA DE ESPERA";
+
+
+  spinner.classList.toggle(
+    "hidden",
+    !loading
+  );
+
+
+  submitArrow.classList.toggle(
+    "hidden",
+    loading
+  );
+
+}
+
+
+
+/*
+========================================================
+MENSAGENS
+========================================================
+*/
+
+function showMessage(
+  text,
+  type = ""
+) {
+
+  formMessage.textContent =
+    text;
+
+
+  formMessage.className =
+    `form-message ${type}`;
+
+}
+
+
+
+/*
+========================================================
+MODAL
+========================================================
+*/
+
+function openSuccessModal() {
+
+  modal.classList.remove("hidden");
+
+  document.body.classList.add(
+    "modal-open"
+  );
+
+}
+
+
+function closeSuccessModal() {
+
+  modal.classList.add("hidden");
+
+  document.body.classList.remove(
+    "modal-open"
+  );
+
+}
+
+
+closeModal.addEventListener(
+  "click",
+  closeSuccessModal
+);
+
+
+modal.addEventListener(
+  "click",
+  event => {
+
+    if (event.target === modal) {
+
+      closeSuccessModal();
+
+    }
+
+  }
+);
+
+
+
+/*
+========================================================
 ENVIO
-=========================================================
+========================================================
 */
 
 form.addEventListener(
@@ -336,14 +302,19 @@ form.addEventListener(
     showMessage("");
 
 
+    /*
+    URL NÃO CONFIGURADA
+    */
+
     if (
+      !WEB_APP_URL ||
       WEB_APP_URL.includes(
         "COLE_AQUI"
       )
     ) {
 
       showMessage(
-        "Configure a URL do Apps Script.",
+        "Configure a URL do Apps Script no script.js.",
         "error"
       );
 
@@ -351,6 +322,11 @@ form.addEventListener(
 
     }
 
+
+
+    /*
+    VALIDA WHATSAPP
+    */
 
     const phone =
       onlyDigits(
@@ -376,7 +352,12 @@ form.addEventListener(
     }
 
 
-    const data =
+
+    /*
+    MONTA DADOS
+    */
+
+    const formData =
       new FormData(form);
 
 
@@ -386,7 +367,7 @@ form.addEventListener(
 
     for (
       const [key,value]
-      of data.entries()
+      of formData.entries()
     ) {
 
       payload.append(
@@ -408,6 +389,11 @@ form.addEventListener(
       window.location.href
     );
 
+
+
+    /*
+    ENVIA
+    */
 
     setLoading(true);
 
@@ -439,8 +425,23 @@ form.addEventListener(
       );
 
 
+      /*
+      LIMPA FORM
+      */
+
       form.reset();
 
+
+      /*
+      REAPLICA ORIGEM
+      */
+
+      detectOrigin();
+
+
+      /*
+      SUCESSO
+      */
 
       showMessage(
         "Cadastro enviado.",
@@ -448,25 +449,25 @@ form.addEventListener(
       );
 
 
-      openSuccess();
+      openSuccessModal();
 
+
+      /*
+      ATUALIZA CONTADOR
+      */
 
       setTimeout(
         loadStats,
-        1800
+        1500
       );
 
 
     }
 
-    catch (
-      error
-    ) {
+    catch (error) {
 
 
-      console.error(
-        error
-      );
+      console.error(error);
 
 
       showMessage(
@@ -479,7 +480,9 @@ form.addEventListener(
 
     finally {
 
+
       setLoading(false);
+
 
     }
 
@@ -489,168 +492,14 @@ form.addEventListener(
 
 
 /*
-=========================================================
-COUNTDOWN
-=========================================================
-*/
-
-const launchDate =
-  new Date(
-    "2026-09-09T14:00:00-03:00"
-  );
-
-
-const countdownCard =
-  document.getElementById(
-    "countdownCard"
-  );
-
-
-const postLaunchCard =
-  document.getElementById(
-    "postLaunchCard"
-  );
-
-
-
-function showPostLaunch() {
-
-  countdownCard.classList.add(
-    "hidden"
-  );
-
-
-  postLaunchCard.classList.remove(
-    "hidden"
-  );
-
-}
-
-
-
-function updateCountdown() {
-
-  const now =
-    new Date();
-
-
-  let difference =
-    launchDate -
-    now;
-
-
-  if (
-    difference <= 0
-  ) {
-
-    showPostLaunch();
-
-    return;
-
-  }
-
-
-  const days =
-    Math.floor(
-      difference /
-      86400000
-    );
-
-
-  difference %=
-    86400000;
-
-
-  const hours =
-    Math.floor(
-      difference /
-      3600000
-    );
-
-
-  difference %=
-    3600000;
-
-
-  const minutes =
-    Math.floor(
-      difference /
-      60000
-    );
-
-
-  difference %=
-    60000;
-
-
-  const seconds =
-    Math.floor(
-      difference /
-      1000
-    );
-
-
-  document.getElementById(
-    "days"
-  ).textContent =
-    String(days)
-      .padStart(
-        2,
-        "0"
-      );
-
-
-  document.getElementById(
-    "hours"
-  ).textContent =
-    String(hours)
-      .padStart(
-        2,
-        "0"
-      );
-
-
-  document.getElementById(
-    "minutes"
-  ).textContent =
-    String(minutes)
-      .padStart(
-        2,
-        "0"
-      );
-
-
-  document.getElementById(
-    "seconds"
-  ).textContent =
-    String(seconds)
-      .padStart(
-        2,
-        "0"
-      );
-
-}
-
-
-
-updateCountdown();
-
-
-setInterval(
-  updateCountdown,
-  1000
-);
-
-
-
-/*
-=========================================================
+========================================================
 ESTATÍSTICAS
-=========================================================
+========================================================
 */
 
 window.receiveVipStats =
   function(data) {
+
 
     if (!data) {
       return;
@@ -668,6 +517,10 @@ window.receiveVipStats =
         data.today || 0
       );
 
+
+    /*
+    SOMA BASE + PLANILHA
+    */
 
     const total =
       BASE_LIST_COUNT +
@@ -687,9 +540,11 @@ window.receiveVipStats =
 
 
 
-    if (
-      total === 1
-    ) {
+    /*
+    TOTAL
+    */
+
+    if (total === 1) {
 
       leadCount.textContent =
         "1 pessoa já entrou";
@@ -705,18 +560,18 @@ window.receiveVipStats =
 
 
 
-    if (
-      today <= 0
-    ) {
+    /*
+    HOJE
+    */
+
+    if (today <= 0) {
 
       todayCount.textContent =
         "Lista recebendo novos cadastros";
 
     }
 
-    else if (
-      today === 1
-    ) {
+    else if (today === 1) {
 
       todayCount.textContent =
         "1 pessoa entrou hoje";
@@ -734,9 +589,17 @@ window.receiveVipStats =
 
 
 
+/*
+========================================================
+CARREGA ESTATÍSTICAS
+========================================================
+*/
+
 function loadStats() {
 
+
   if (
+    !WEB_APP_URL ||
     WEB_APP_URL.includes(
       "COLE_AQUI"
     )
@@ -747,17 +610,15 @@ function loadStats() {
   }
 
 
-  const previous =
+  const oldScript =
     document.getElementById(
       "vip-stats-script"
     );
 
 
-  if (
-    previous
-  ) {
+  if (oldScript) {
 
-    previous.remove();
+    oldScript.remove();
 
   }
 
